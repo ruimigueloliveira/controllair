@@ -17,10 +17,23 @@ import pt.ua.es.sky_traffic.web.dto.FlightDto;
 public class FlightController {
   @Autowired private FlightService flightService;
 
-  @GetMapping(path = "/flights")
+  @GetMapping(path = "/arrivals")
   @ResponseStatus(HttpStatus.OK)
-  public Collection<FlightDto> getLastFlights() {
-    Collection<Flight> lastlights = flightService.getLastFlights();
+  public Collection<FlightDto> getLastArrivalFlights() {
+    Collection<Flight> lastlights = flightService.getLastArrivalFlights();
+    // mapear para FlightDTO
+    Collection<FlightDto> flightDtos = new ArrayList<>();
+    for (Flight flight : lastlights) {
+      FlightDto flightDto = mapFromFlightToFlightDto(flight);
+      flightDtos.add(flightDto);
+    }
+    return flightDtos;
+  }
+
+  @GetMapping(path = "/departures")
+  @ResponseStatus(HttpStatus.OK)
+  public Collection<FlightDto> getLastDepartureFlights() {
+    Collection<Flight> lastlights = flightService.getLastDepartureFlights();
     // mapear para FlightDTO
     Collection<FlightDto> flightDtos = new ArrayList<>();
     for (Flight flight : lastlights) {

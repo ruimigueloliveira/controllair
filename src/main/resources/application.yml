@@ -1,3 +1,5 @@
 app:
-  openSkyUri: "https://USERNAME:PASSWORD@opensky-network.org/api/flights/all"
+  openSkyUri: "https://USERNAME:PASSWORD@opensky-network.org/api/flights/arrival"
+  airportCode: "LPPT"
 
+  openSkyUri1: "https://USERNAME:PASSWORD@opensky-network.org/api/flights/departure"
