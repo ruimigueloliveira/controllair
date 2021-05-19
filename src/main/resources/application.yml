@@ -1,0 +1,3 @@
+app:
+  openSkyUri: "https://USERNAME:PASSWORD@opensky-network.org/api/flights/all"
+
