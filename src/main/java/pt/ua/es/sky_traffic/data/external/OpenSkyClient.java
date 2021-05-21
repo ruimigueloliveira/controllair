@@ -35,18 +35,18 @@ public class OpenSkyClient {
   }
 
   public Collection<OpenSkyDto> getDepartureFlights(
-          String airportCode, LocalDateTime begin, LocalDateTime end) throws RestClientException {
+      String airportCode, LocalDateTime begin, LocalDateTime end) throws RestClientException {
     RestTemplate restTemplate = new RestTemplate();
     UriComponentsBuilder uriComponentsBuilder =
-            UriComponentsBuilder.fromUriString(appConfig.getOpenSkyUri1())
-                    // Add query parameter
-                    .queryParam("airport", airportCode)
-                    .queryParam("begin", begin.toEpochSecond(OffsetDateTime.now().getOffset()))
-                    .queryParam("end", end.toEpochSecond(OffsetDateTime.now().getOffset()));
+        UriComponentsBuilder.fromUriString(appConfig.getOpenSkyUri1())
+            // Add query parameter
+            .queryParam("airport", airportCode)
+            .queryParam("begin", begin.toEpochSecond(OffsetDateTime.now().getOffset()))
+            .queryParam("end", end.toEpochSecond(OffsetDateTime.now().getOffset()));
 
     // Aqui usei o get em vez do exchange, assim retonar um array e depois converto para lista
     OpenSkyDto[] response =
-            restTemplate.getForObject(uriComponentsBuilder.build().toUri(), OpenSkyDto[].class);
+        restTemplate.getForObject(uriComponentsBuilder.build().toUri(), OpenSkyDto[].class);
 
     return Arrays.asList(response);
   }

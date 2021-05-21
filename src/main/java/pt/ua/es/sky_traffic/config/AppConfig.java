@@ -34,6 +34,3 @@ public class AppConfig {
     this.openSkyUri1 = openSkyUri1;
   }
 }
-
-
-
