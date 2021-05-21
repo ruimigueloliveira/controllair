@@ -1,31 +1,39 @@
-pipeline{
-	agent any
-	
-	stages {
-		stage('Compile Stage') {
-			steps {
-				withMaven(maven: 'maven_3_5_0'){
-					sh 'mvn clean compile'		
-				}
-			}
-		}
+pipeline {
+    agent any
 
-		stage('Testing Stage') {
-			steps {
-				withMaven(maven: 'maven_3_5_0'){
-					sh 'mvn test'		
-				}
-			}
-		}
+    stages {
+	stage ('Build') {
 
-		stage('Deployment Stage') {
-			steps {
-				withMaven(maven: 'maven_3_5_0'){
-					sh 'mvn deploy'		
-				}
-			}
-		}
+            steps {
+               sh 'mvn clean install'
+            }
+        }
 
-	}
-	
+        stage ('Compile Stage') {
+
+            steps {
+                withMaven(maven : 'maven_3_5_0') {
+                    sh 'mvn clean compile'
+                }
+            }
+        }
+
+        stage ('Testing Stage') {
+
+            steps {
+                withMaven(maven : 'maven_3_5_0') {
+                    sh 'mvn test'
+                }
+            }
+        }
+
+
+        stage ('Deployment Stage') {
+            steps {
+                withMaven(maven : 'maven_3_5_0') {
+                    sh 'mvn deploy'
+                }
+            }
+        }
+    }
 }
