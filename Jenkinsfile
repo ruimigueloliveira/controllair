@@ -13,7 +13,7 @@ pipeline {
                 sh 'java -version'
                 sh 'docker --version'
 
-				sh "mvn clean install"
+				sh 'mvn clean install'
 			}
 		}
 		
