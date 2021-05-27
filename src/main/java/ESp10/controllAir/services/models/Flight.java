@@ -1,4 +1,4 @@
-package pt.ua.es.sky_traffic.services.models;
+package ESp10.controllAir.services.models;
 
 import java.time.LocalDateTime;
 
@@ -39,6 +39,7 @@ public class Flight {
     this.callsign = callsign;
     this.estDepartureAirportHorizDistance = estDepartureAirportHorizDistance;
     this.estDepartureAirportVertDistance = estDepartureAirportVertDistance;
+    this.estArrivalAirportHorizDistance = estArrivalAirportHorizDistance;
     this.estArrivalAirportVertDistance = estArrivalAirportVertDistance;
     this.departureAirportCandidatesCount = departureAirportCandidatesCount;
     this.arrivalAirportCandidatesCount = arrivalAirportCandidatesCount;

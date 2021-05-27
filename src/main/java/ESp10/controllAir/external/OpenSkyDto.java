@@ -1,12 +1,11 @@
-package pt.ua.es.sky_traffic.services.models;
+package ESp10.controllAir.external;
 
-import java.time.LocalDateTime;
-
-public class Flight {
+public class OpenSkyDto {
+  // Objeto que a API externa retorna
   private String icao24;
-  private LocalDateTime firstSeen;
+  private Integer firstSeen;
   private String estDepartureAirport;
-  private LocalDateTime lastSeen;
+  private Integer lastSeen;
   private String estArrivalAirport;
   private String callsign;
   private Integer estDepartureAirportHorizDistance;
@@ -16,13 +15,13 @@ public class Flight {
   private Integer departureAirportCandidatesCount;
   private Integer arrivalAirportCandidatesCount;
 
-  public Flight() {}
+  public OpenSkyDto() {}
 
-  public Flight(
+  public OpenSkyDto(
       String icao24,
-      LocalDateTime firstSeen,
+      Integer firstSeen,
       String estDepartureAirport,
-      LocalDateTime lastSeen,
+      Integer lastSeen,
       String estArrivalAirport,
       String callsign,
       Integer estDepartureAirportHorizDistance,
@@ -39,6 +38,7 @@ public class Flight {
     this.callsign = callsign;
     this.estDepartureAirportHorizDistance = estDepartureAirportHorizDistance;
     this.estDepartureAirportVertDistance = estDepartureAirportVertDistance;
+    this.estArrivalAirportHorizDistance = estArrivalAirportHorizDistance;
     this.estArrivalAirportVertDistance = estArrivalAirportVertDistance;
     this.departureAirportCandidatesCount = departureAirportCandidatesCount;
     this.arrivalAirportCandidatesCount = arrivalAirportCandidatesCount;
@@ -52,11 +52,11 @@ public class Flight {
     this.icao24 = icao24;
   }
 
-  public LocalDateTime getFirstSeen() {
+  public Integer getFirstSeen() {
     return firstSeen;
   }
 
-  public void setFirstSeen(LocalDateTime firstSeen) {
+  public void setFirstSeen(Integer firstSeen) {
     this.firstSeen = firstSeen;
   }
 
@@ -68,11 +68,11 @@ public class Flight {
     this.estDepartureAirport = estDepartureAirport;
   }
 
-  public LocalDateTime getLastSeen() {
+  public Integer getLastSeen() {
     return lastSeen;
   }
 
-  public void setLastSeen(LocalDateTime lastSeen) {
+  public void setLastSeen(Integer lastSeen) {
     this.lastSeen = lastSeen;
   }
 
@@ -138,5 +138,39 @@ public class Flight {
 
   public void setArrivalAirportCandidatesCount(Integer arrivalAirportCandidatesCount) {
     this.arrivalAirportCandidatesCount = arrivalAirportCandidatesCount;
+  }
+
+  @Override
+  public String toString() {
+    return "OpenSkyDto{"
+        + "icao24='"
+        + icao24
+        + '\''
+        + ", firstSeen="
+        + firstSeen
+        + ", estDepartureAirport='"
+        + estDepartureAirport
+        + '\''
+        + ", lastSeen="
+        + lastSeen
+        + ", estArrivalAirport='"
+        + estArrivalAirport
+        + '\''
+        + ", callsign='"
+        + callsign
+        + '\''
+        + ", estDepartureAirportHorizDistance="
+        + estDepartureAirportHorizDistance
+        + ", estDepartureAirportVertDistance="
+        + estDepartureAirportVertDistance
+        + ", estArrivalAirportHorizDistance="
+        + estArrivalAirportHorizDistance
+        + ", estArrivalAirportVertDistance="
+        + estArrivalAirportVertDistance
+        + ", departureAirportCandidatesCount="
+        + departureAirportCandidatesCount
+        + ", arrivalAirportCandidatesCount="
+        + arrivalAirportCandidatesCount
+        + '}';
   }
 }

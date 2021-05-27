@@ -1,8 +1,9 @@
-package pt.ua.es.sky_traffic.services.models;
+package ESp10.controllAir.web.dto;
 
 import java.time.LocalDateTime;
 
-public class Flight {
+public class FlightDto { // Flight---->FlightDto---->localhost
+
   private String icao24;
   private LocalDateTime firstSeen;
   private String estDepartureAirport;
@@ -16,9 +17,9 @@ public class Flight {
   private Integer departureAirportCandidatesCount;
   private Integer arrivalAirportCandidatesCount;
 
-  public Flight() {}
+  public FlightDto() {}
 
-  public Flight(
+  public FlightDto(
       String icao24,
       LocalDateTime firstSeen,
       String estDepartureAirport,
@@ -39,6 +40,7 @@ public class Flight {
     this.callsign = callsign;
     this.estDepartureAirportHorizDistance = estDepartureAirportHorizDistance;
     this.estDepartureAirportVertDistance = estDepartureAirportVertDistance;
+    this.estArrivalAirportHorizDistance = estArrivalAirportHorizDistance;
     this.estArrivalAirportVertDistance = estArrivalAirportVertDistance;
     this.departureAirportCandidatesCount = departureAirportCandidatesCount;
     this.arrivalAirportCandidatesCount = arrivalAirportCandidatesCount;
@@ -138,5 +140,39 @@ public class Flight {
 
   public void setArrivalAirportCandidatesCount(Integer arrivalAirportCandidatesCount) {
     this.arrivalAirportCandidatesCount = arrivalAirportCandidatesCount;
+  }
+
+  @Override
+  public String toString() {
+    return "FlightDto{"
+        + "icao24='"
+        + icao24
+        + '\''
+        + ", firstSeen="
+        + firstSeen
+        + ", estDepartureAirport='"
+        + estDepartureAirport
+        + '\''
+        + ", lastSeen="
+        + lastSeen
+        + ", estArrivalAirport='"
+        + estArrivalAirport
+        + '\''
+        + ", callsign='"
+        + callsign
+        + '\''
+        + ", estDepartureAirportHorizDistance="
+        + estDepartureAirportHorizDistance
+        + ", estDepartureAirportVertDistance="
+        + estDepartureAirportVertDistance
+        + ", estArrivalAirportHorizDistance="
+        + estArrivalAirportHorizDistance
+        + ", estArrivalAirportVertDistance="
+        + estArrivalAirportVertDistance
+        + ", departureAirportCandidatesCount="
+        + departureAirportCandidatesCount
+        + ", arrivalAirportCandidatesCount="
+        + arrivalAirportCandidatesCount
+        + '}';
   }
 }
