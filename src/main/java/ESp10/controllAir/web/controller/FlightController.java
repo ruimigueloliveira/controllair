@@ -45,6 +45,19 @@ public class FlightController {
     return flightDtos;
   }
 
+  @GetMapping(path = "/history")
+  @ResponseStatus(HttpStatus.OK)
+  public Collection<FlightDto> getLast7DFlights() { // from db
+    Collection<Flight> last24HoursFlights = flightService.getFlightsFromDb();
+    // mapear para FlightDTO
+    Collection<FlightDto> flightDtos = new ArrayList<>();
+    for (Flight flight : last24HoursFlights) {
+      FlightDto flightDto = mapFromFlightToFlightDto(flight);
+      flightDtos.add(flightDto);
+    }
+    return flightDtos;
+  }
+
   private FlightDto mapFromFlightToFlightDto(Flight flight) {
     FlightDto flightDto = new FlightDto();
     flightDto.setIcao24(flight.getIcao24());

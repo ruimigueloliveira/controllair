@@ -1,4 +1,4 @@
-package ESp10.controllAir.external;
+package ESp10.controllAir.data.external;
 
 public class OpenSkyDto {
   // Objeto que a API externa retorna

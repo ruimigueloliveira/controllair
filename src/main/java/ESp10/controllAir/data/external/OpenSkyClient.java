@@ -1,4 +1,4 @@
-package ESp10.controllAir.external;
+package ESp10.controllAir.data.external;
 
 import ESp10.controllAir.config.AppConfig;
 import org.springframework.beans.factory.annotation.Autowired;
