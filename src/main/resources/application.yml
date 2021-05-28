@@ -1,5 +1,15 @@
 app:
   openSkyUri: "https://USERNAME:PASSWORD@opensky-network.org/api/flights/arrival"
   airportCode: "LPPT"
-
   openSkyUri1: "https://USERNAME:PASSWORD@opensky-network.org/api/flights/departure"
+
+  spring:
+    jpa:
+      hibernate:
+        ddl-auto: create #inicializa o schema da bd
+    datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:33060/ap_db?createDatabaseIfNotExist=true
+      username: shared-mysql
+      password: mysql
+      initialization-mode: always
