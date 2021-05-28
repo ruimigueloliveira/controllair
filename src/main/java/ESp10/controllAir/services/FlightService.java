@@ -1,9 +1,11 @@
 package ESp10.controllAir.services;
 
 import ESp10.controllAir.config.AppConfig;
-import ESp10.controllAir.external.OpenSkyClient;
-import ESp10.controllAir.external.OpenSkyDto;
+import ESp10.controllAir.data.external.OpenSkyClient;
+import ESp10.controllAir.data.external.OpenSkyDto;
 import ESp10.controllAir.services.models.Flight;
+import ESp10.controllAir.data.persistance.entity.FlightEntity;
+import ESp10.controllAir.data.persistance.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,13 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static java.time.LocalDateTime.now;
+
 @Service
 public class FlightService {
   @Autowired private OpenSkyClient openSkyClient;
   @Autowired private AppConfig appConfig;
+  @Autowired private FlightRepository flightRepository;
 
   public Collection<Flight> getLastArrivalFlights() {
     Collection<OpenSkyDto> openSkyDtos =
@@ -28,10 +33,8 @@ public class FlightService {
       Flight flight = mapFromOpenSkyDtoToFlight(dto);
       flights.add(flight);
     }
+    saveFlights(flights);
     return flights;
-
-    // return
-    // openSkyDtos.stream().map(this::mapFromOpenSkyDtoToFlight).collect(Collectors.toList());
   }
 
   public Collection<Flight> getLastDepartureFlights() {
@@ -44,9 +47,42 @@ public class FlightService {
       flights.add(flight);
     }
     return flights;
+  }
 
-    // return
-    // openSkyDtos.stream().map(this::mapFromOpenSkyDtoToFlight).collect(Collectors.toList());
+  public Collection<Flight> getFlightsFromDb() {
+    ArrayList<Flight> flights = new ArrayList<>();
+    Collection<FlightEntity> flightEntityList =
+            flightRepository.findByLastSeenBetween(now().minusDays(7), now()); //voos de 7 dias anteriores
+    for (FlightEntity entity : flightEntityList) {
+      Flight flight = mapFromEntityToModel(entity);
+      flights.add(flight);
+    }
+    return flights;
+  }
+
+  private void saveFlights(Collection<Flight> flightsToSave) {
+
+    Collection<FlightEntity> flightEntities = new ArrayList<>();
+
+    for (Flight flight : flightsToSave) {
+      FlightEntity f = new FlightEntity();
+      f.setCallsign(flight.getCallsign());
+      f.setEstArrivalAirport(flight.getEstArrivalAirport());
+      f.setLastSeen(flight.getLastSeen());
+      f.setFirstSeen(flight.getFirstSeen());
+      f.setEstDepartureAirport(flight.getEstDepartureAirport());
+      f.setEstArrivalAirport(flight.getEstArrivalAirport());
+      f.setIcao24(flight.getIcao24());
+      f.setEstDepartureAirportHorizDistance(flight.getEstDepartureAirportHorizDistance());
+      f.setEstDepartureAirportVertDistance(flight.getEstDepartureAirportVertDistance());
+      f.setEstArrivalAirportHorizDistance(flight.getEstArrivalAirportHorizDistance());
+      f.setEstArrivalAirportVertDistance(flight.getEstArrivalAirportVertDistance());
+      f.setDepartureAirportCandidatesCount(flight.getDepartureAirportCandidatesCount());
+      f.setArrivalAirportCandidatesCount(flight.getArrivalAirportCandidatesCount());
+      flightEntities.add(f);
+    }
+
+    flightRepository.saveAll(flightEntities);
   }
 
   private Flight mapFromOpenSkyDtoToFlight(OpenSkyDto openSkyDto) {
@@ -68,6 +104,25 @@ public class FlightService {
     flight.setDepartureAirportCandidatesCount(openSkyDto.getDepartureAirportCandidatesCount());
     flight.setArrivalAirportCandidatesCount(openSkyDto.getArrivalAirportCandidatesCount());
     // MAPEAR PARA OS RESTANTES ATRIBUTOS
+    return flight;
+  }
+
+  private Flight mapFromEntityToModel(FlightEntity flightEntity) {
+    Flight flight = new Flight();
+
+    flight.setCallsign(flightEntity.getCallsign());
+    flight.setIcao24(flightEntity.getIcao24());
+    flight.setLastSeen(flightEntity.getLastSeen());
+    flight.setFirstSeen(flightEntity.getFirstSeen());
+    flight.setEstArrivalAirport(flightEntity.getEstArrivalAirport());
+    flight.setEstDepartureAirport(flightEntity.getEstDepartureAirport());
+    flight.setEstDepartureAirportHorizDistance(flightEntity.getEstDepartureAirportHorizDistance());
+    flight.setEstDepartureAirportVertDistance(flightEntity.getEstDepartureAirportVertDistance());
+    flight.setEstArrivalAirportHorizDistance(flightEntity.getEstArrivalAirportHorizDistance());
+    flight.setEstArrivalAirportVertDistance(flightEntity.getEstArrivalAirportVertDistance());
+    flight.setDepartureAirportCandidatesCount(flightEntity.getDepartureAirportCandidatesCount());
+    flight.setArrivalAirportCandidatesCount(flightEntity.getArrivalAirportCandidatesCount());
+
     return flight;
   }
 }
