@@ -13,6 +13,14 @@ pipeline {
 
 			}
 		}
+
+		stage ('Deploy') {
+            steps{
+                sh 'mvn deploy -f pom.xml -s settings.xml' 
+            }
+        }
+
+
 		
 	}
 }
