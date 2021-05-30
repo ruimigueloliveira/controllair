@@ -3,7 +3,7 @@ pipeline {
 
 	stages {
 
-		stage ('Compile Stage') {
+		stage ('Build') {
 			steps {
 				sh 'mvn --version'
                 sh 'java -version'
@@ -13,6 +13,14 @@ pipeline {
 
 			}
 		}
+
+		stage('Test') {
+            steps {
+                    echo "Testing"
+                    sh "mvn test"
+                }
+            }
+        }
 
 		stage ('Deploy') {
             steps{
