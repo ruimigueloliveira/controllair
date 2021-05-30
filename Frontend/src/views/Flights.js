@@ -15,6 +15,8 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
+// Using axios
+import axios from 'axios'
 
 function Flights() {
 
@@ -58,7 +60,14 @@ function Flights() {
     notificationAlertRef.current.notificationAlert(options);
   };
   
-
+  //------------------------------GET-DATA-FROM-API------------------------------
+  // TODO: allow cors
+  // axios.get("http://localhost:8080/api/arrivals")
+  // .then(
+  //   console.log("Great success!")
+  // )
+  // ----------------------------------------------------------------------------
+  
   return (
     <>
       <div className="rna-container">
