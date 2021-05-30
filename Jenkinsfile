@@ -3,16 +3,6 @@ pipeline {
 
 	stages {
 
-		// stage('Cloning Repository') {
-        //     steps {
-        //         git(
-        //             branch: 'master',
-        //             url: 'https://github.com/DubaiDash-ES/code.git'
-        //         )
-        //         sh "chmod +x -R ${env.WORKSPACE}"
-        //     }
-        // }
-
 		stage ('Compile Stage') {
 			steps {
 				sh 'mvn --version'
@@ -23,14 +13,6 @@ pipeline {
 
 			}
 		}
-
-		// stage ('Deploy') {
-        //     steps{
-        //         sh 'mvn deploy -f pom.xml -s settings.xml' 
-        //     }
-        // }
-
-
 		
 	}
 }
