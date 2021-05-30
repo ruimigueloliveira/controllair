@@ -1,13 +1,21 @@
 package ESp10.controllAir.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
-public class FlightDto { // Flight---->FlightDto---->localhost
+public class FlightDto {
 
   private String icao24;
+
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime firstSeen;
+
   private String estDepartureAirport;
+
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime lastSeen;
+
   private String estArrivalAirport;
   private String callsign;
   private Integer estDepartureAirportHorizDistance;
