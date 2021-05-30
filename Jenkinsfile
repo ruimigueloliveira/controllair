@@ -14,14 +14,6 @@ pipeline {
 			}
 		}
 
-		stage('Test') {
-            steps {
-                    echo "Testing"
-                    sh "mvn test"
-                }
-            }
-        }
-
 		stage ('Deploy') {
             steps{
                 sh 'mvn deploy -f pom.xml -s settings.xml' 
