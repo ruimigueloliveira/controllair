@@ -6,17 +6,6 @@ pipeline {
 	agent any
 
 	stages {
-	    
-	    // stage('Cloning repository') {
-        //     steps {
-        //         git(
-        //             branch: 'main',
-        //             url: 'https://github.com/ruimigueloliveira/controllair.git'
-                    
-        //         )
-        //         sh "chmod +x -R ${env.WORKSPACE}"
-        //     }
-        // }
 
 		stage ('Build') {
 			steps {
