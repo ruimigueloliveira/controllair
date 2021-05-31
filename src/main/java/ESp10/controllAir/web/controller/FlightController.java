@@ -5,10 +5,7 @@ import ESp10.controllAir.services.models.Flight;
 import ESp10.controllAir.web.dto.FlightDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
@@ -18,6 +15,7 @@ import java.util.Collection;
 @RequestMapping("/api")
 public class FlightController {
   @Autowired private FlightService flightService;
+
 
   @GetMapping(path = "/arrivals")
   @ResponseStatus(HttpStatus.OK)
@@ -32,6 +30,7 @@ public class FlightController {
     return flightDtos;
   }
 
+  @CrossOrigin(origins = "http://localhost:3000")  // localhost -> ip ?
   @GetMapping(path = "/departures")
   @ResponseStatus(HttpStatus.OK)
   public Collection<FlightDto> getLastDepartureFlights() {
@@ -45,6 +44,7 @@ public class FlightController {
     return flightDtos;
   }
 
+  @CrossOrigin(origins = "http://localhost:3000")  // localhost -> ip ?
   @GetMapping(path = "/history")
   @ResponseStatus(HttpStatus.OK)
   public Collection<FlightDto> getLast7DFlights() { // from db
@@ -74,7 +74,7 @@ public class FlightController {
     flightDto.setArrivalAirportCandidatesCount(flight.getArrivalAirportCandidatesCount());
 
     flightDto.setEstArrivalAirport(flight.getEstArrivalAirport());
-    // fazer os metodos restantes para todos os atributos
+    // TODO fazer os metodos restantes para todos os atributos
     return flightDto;
   }
 }

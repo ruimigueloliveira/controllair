@@ -4,7 +4,8 @@
 
 ### Docker:
 1. Start docker
-2. `docker-compose up -d`
+2. `cd docker`
+3. `docker-compose up -d`
 
 ### Maven build
 `mvn clean install`
