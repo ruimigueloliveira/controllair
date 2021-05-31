@@ -1,11 +1,12 @@
 package ESp10.controllAir.services;
 
+
 import ESp10.controllAir.config.AppConfig;
 import ESp10.controllAir.data.external.OpenSkyClient;
 import ESp10.controllAir.data.external.OpenSkyDto;
-import ESp10.controllAir.services.models.Flight;
 import ESp10.controllAir.data.persistance.entity.FlightEntity;
 import ESp10.controllAir.data.persistance.repository.FlightRepository;
+import ESp10.controllAir.services.models.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,30 @@ public class FlightService {
       Flight flight = mapFromOpenSkyDtoToFlight(dto);
       flights.add(flight);
     }
+    return flights;
+  }
+
+  public Collection<Flight> getArrivalFlightsForTimeInterval(LocalDateTime start, LocalDateTime end) {
+    Collection<OpenSkyDto> openSkyDtos =
+            openSkyClient.getArrivalFlights(appConfig.getAirportCode(), start, end);
+    ArrayList<Flight> flights = new ArrayList<>();
+    for (OpenSkyDto dto : openSkyDtos) {
+      Flight flight = mapFromOpenSkyDtoToFlight(dto);
+      flights.add(flight);
+    }
+    saveFlights(flights);
+    return flights;
+  }
+
+  public Collection<Flight> getDepartureFlightsForTimeInterval(LocalDateTime start, LocalDateTime end) {
+    Collection<OpenSkyDto> openSkyDtos =
+            openSkyClient.getDepartureFlights(appConfig.getAirportCode(), start, end);
+    ArrayList<Flight> flights = new ArrayList<>();
+    for (OpenSkyDto dto : openSkyDtos) {
+      Flight flight = mapFromOpenSkyDtoToFlight(dto);
+      flights.add(flight);
+    }
+    saveFlights(flights);
     return flights;
   }
 
