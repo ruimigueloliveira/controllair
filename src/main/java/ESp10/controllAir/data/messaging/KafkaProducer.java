@@ -11,28 +11,28 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Service
 public class KafkaProducer {
-    private static final String TOPIC = "flights";
-    private static final Logger log = LoggerFactory.getLogger(KafkaProducer.class);
+  private static final String TOPIC = "flights";
+  private static final Logger log = LoggerFactory.getLogger(KafkaProducer.class);
 
-    @Autowired private KafkaTemplate<String, Flight> kafkaTemplate;
+  @Autowired private KafkaTemplate<String, Flight> kafkaTemplate;
 
-    public void sendMessage(String key, Flight message) {
-        kafkaTemplate
-                .send(TOPIC, key, message)
-                .addCallback(
-                        new ListenableFutureCallback<SendResult<String, Flight>>() {
-                            @Override
-                            public void onFailure(Throwable ex) {
-                                log.error("Flight: {} failed to be sent to kafka", message.toString(), ex);
-                            }
+  public void sendMessage(String key, Flight message) {
+    kafkaTemplate
+        .send(TOPIC, key, message)
+        .addCallback(
+            new ListenableFutureCallback<SendResult<String, Flight>>() {
+              @Override
+              public void onFailure(Throwable ex) {
+                log.error("Flight: {} failed to be sent to kafka", message.toString(), ex);
+              }
 
-                            @Override
-                            public void onSuccess(SendResult<String, Flight> result) {
-                                log.info(
-                                        "Flight: {}  Flight was sent to kafka with offset: id--> {}",
-                                        message.getIcao24(),
-                                        result.getRecordMetadata().offset());
-                            }
-                        });
-    }
+              @Override
+              public void onSuccess(SendResult<String, Flight> result) {
+                log.info(
+                    "Flight: {}  Flight was sent to kafka with offset: id--> {}",
+                    message.getIcao24(),
+                    result.getRecordMetadata().offset());
+              }
+            });
+  }
 }

@@ -1,17 +1,15 @@
 package ESp10.controllAir.data.external;
 
 import ESp10.controllAir.config.AppConfig;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.util.Arrays;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
-
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.util.Arrays;
-import java.util.Collection;
 
 @Component
 public class OpenSkyClient {

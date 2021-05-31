@@ -1,10 +1,10 @@
 package ESp10.controllAir.data.persistance.entity;
 
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "flight") // nao quero q a minha tabela tenha uma coluna chamada flightentity

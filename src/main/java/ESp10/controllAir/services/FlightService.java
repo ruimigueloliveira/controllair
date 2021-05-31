@@ -1,5 +1,6 @@
 package ESp10.controllAir.services;
 
+import static java.time.LocalDateTime.now;
 
 import ESp10.controllAir.config.AppConfig;
 import ESp10.controllAir.data.external.OpenSkyClient;
@@ -7,17 +8,13 @@ import ESp10.controllAir.data.external.OpenSkyDto;
 import ESp10.controllAir.data.persistance.entity.FlightEntity;
 import ESp10.controllAir.data.persistance.repository.FlightRepository;
 import ESp10.controllAir.services.models.Flight;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import static java.time.LocalDateTime.now;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class FlightService {
@@ -50,9 +47,10 @@ public class FlightService {
     return flights;
   }
 
-  public Collection<Flight> getArrivalFlightsForTimeInterval(LocalDateTime start, LocalDateTime end) {
+  public Collection<Flight> getArrivalFlightsForTimeInterval(
+      LocalDateTime start, LocalDateTime end) {
     Collection<OpenSkyDto> openSkyDtos =
-            openSkyClient.getArrivalFlights(appConfig.getAirportCode(), start, end);
+        openSkyClient.getArrivalFlights(appConfig.getAirportCode(), start, end);
     ArrayList<Flight> flights = new ArrayList<>();
     for (OpenSkyDto dto : openSkyDtos) {
       Flight flight = mapFromOpenSkyDtoToFlight(dto);
@@ -62,9 +60,10 @@ public class FlightService {
     return flights;
   }
 
-  public Collection<Flight> getDepartureFlightsForTimeInterval(LocalDateTime start, LocalDateTime end) {
+  public Collection<Flight> getDepartureFlightsForTimeInterval(
+      LocalDateTime start, LocalDateTime end) {
     Collection<OpenSkyDto> openSkyDtos =
-            openSkyClient.getDepartureFlights(appConfig.getAirportCode(), start, end);
+        openSkyClient.getDepartureFlights(appConfig.getAirportCode(), start, end);
     ArrayList<Flight> flights = new ArrayList<>();
     for (OpenSkyDto dto : openSkyDtos) {
       Flight flight = mapFromOpenSkyDtoToFlight(dto);
@@ -77,7 +76,8 @@ public class FlightService {
   public Collection<Flight> getFlightsFromDb() {
     ArrayList<Flight> flights = new ArrayList<>();
     Collection<FlightEntity> flightEntityList =
-            flightRepository.findByLastSeenBetween(now().minusDays(7), now()); //voos de 7 dias anteriores
+        flightRepository.findByLastSeenBetween(
+            now().minusDays(7), now()); // voos de 7 dias anteriores
     for (FlightEntity entity : flightEntityList) {
       Flight flight = mapFromEntityToModel(entity);
       flights.add(flight);

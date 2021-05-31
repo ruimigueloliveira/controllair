@@ -8,8 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @SpringBootApplication
 public class ControllAirApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ControllAirApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(ControllAirApplication.class, args);
+  }
 }

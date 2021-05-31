@@ -1,6 +1,5 @@
 package ESp10.controllAir.data.messaging;
 
-
 import ESp10.controllAir.services.models.Flight;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
