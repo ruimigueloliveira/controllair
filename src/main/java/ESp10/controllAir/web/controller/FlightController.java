@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class FlightController {
   @Autowired private FlightService flightService;
 
-
   @GetMapping(path = "/arrivals")
   @ResponseStatus(HttpStatus.OK)
   public Collection<FlightDto> getLastArrivalFlights() {
@@ -28,7 +27,7 @@ public class FlightController {
     return flightDtos;
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")  // localhost -> ip ?
+  @CrossOrigin(origins = "http://localhost:3000") // localhost -> ip ?
   @GetMapping(path = "/departures")
   @ResponseStatus(HttpStatus.OK)
   public Collection<FlightDto> getLastDepartureFlights() {
@@ -42,7 +41,7 @@ public class FlightController {
     return flightDtos;
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")  // localhost -> ip ?
+  @CrossOrigin(origins = "http://localhost:3000") // localhost -> ip ?
   @GetMapping(path = "/history")
   @ResponseStatus(HttpStatus.OK)
   public Collection<FlightDto> getLast7DFlights() { // from db
