@@ -8,10 +8,9 @@ services:
     ports:
       - 33060:3306
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: mysql
       MYSQL_DATABASE: ap_db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_PASSWORD: mysql
     command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"
 
   zookeeper:

@@ -12,7 +12,7 @@ spring:
     url: jdbc:mysql://localhost:33060/ap_db?createDatabaseIfNotExist=true
     # url: jdbc:mysql://192.168.160.18:10001/ap_db?createDatabaseIfNotExist=true
     username: root
-    password: root
+    password: mysql
     initialization-mode: always
 
   kafka:
