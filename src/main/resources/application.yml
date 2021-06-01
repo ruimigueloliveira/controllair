@@ -11,7 +11,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:33060/ap_db?createDatabaseIfNotExist=true
     # url: jdbc:mysql://192.168.160.18:10001/ap_db?createDatabaseIfNotExist=true
-    username: ap_user
+    username: root
     password: root
     initialization-mode: always
 
