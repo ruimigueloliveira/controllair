@@ -10,6 +10,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     # url: jdbc:mysql://localhost:33060/ap_db?createDatabaseIfNotExist=true
+    cap_add:
+      - SYS_NICE
     url: jdbc:mysql://192.168.160.18:10001/controllair_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: mysql
