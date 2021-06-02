@@ -2,10 +2,10 @@
 # pull official base image
 FROM node:14.16.1-alpine
 # set working directory
-WORKDIR /Frontend
-# add `/Frontend/node_modules/.bin` to $PATH
-ENV PATH /Frontend/node_modules/.bin:$PATH
-# install Frontend dependencies
+WORKDIR /react
+# add `/react/node_modules/.bin` to $PATH
+ENV PATH /react/node_modules/.bin:$PATH
+# install react dependencies
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm install reactstrap
@@ -13,7 +13,9 @@ RUN npm install bootstrap
 RUN npm install jquery
 RUN npm install axios
 
-# add Frontend
+EXPOSE 3000
+
+# add react
 COPY . ./
-# start Frontend
+# start react
 CMD ["npm", "start"]

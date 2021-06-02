@@ -1,9 +1,0 @@
-version: '3.3' # ???
-
-services:
-  frontend:
-    image: esp10_controllair_react:1.0 # ???
-    container_name: esp10_controllair_react
-    build: .
-    ports:
-      - 80:8080 # ???

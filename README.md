@@ -4,11 +4,13 @@
 
 ### Docker:
 1. Start docker
-2. `cd docker`
+2. `cd controllair`
 3. `docker-compose up -d`
 
 ### Maven build
-`mvn clean install`
+1. `cd controllair`
+2. `mvn clean install`
 
 ### Run spring-boot app:
-`mvn spring-boot:run`
+1. `cd controllair`
+2. `mvn spring-boot:run`
