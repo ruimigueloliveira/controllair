@@ -8,12 +8,10 @@ ENV PATH /react/node_modules/.bin:$PATH
 # install react dependencies
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm install reactstrap
-RUN npm install bootstrap
-RUN npm install jquery
-RUN npm install axios
-
-EXPOSE 3000
+RUN npm ci reactstrap
+RUN npm ci bootstrap
+RUN npm ci jquery
+RUN npm ci axios
 
 # add react
 COPY . ./
