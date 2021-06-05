@@ -20,6 +20,9 @@ import axios from 'axios'
 
 const ARRIVALS_URL = `http://localhost:8080/api/arrivals`;
 const dynamicData = [axios.get(ARRIVALS_URL)];
+dynamicData[0].then( res => {
+  console.log('>>>>> dynamicData', res);
+});
 
 function Flights() {
 
@@ -105,7 +108,7 @@ function Flights() {
   )
 }
 
-function FlightsTable({ res }) {
+function FlightsTable() {
 
   const notificationAlertRef = React.useRef(null);
   const notify = (place) => {
@@ -172,11 +175,12 @@ function FlightsTable({ res }) {
         {/* {{ dynamicData }} */}
         {dynamicData.map((flight) =>
           <tr key={flight}>
-          {flight.map((key, obj) =>
+          {Object.entries(flight).map(([key, obj]) =>
             <td key={key}>{
               {obj}
               }</td>
-          )}
+          )
+          }
           </tr>
         )}
         <tr>
