@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // react plugin for creating notifications over the dashboard
 import NotificationAlert from "react-notification-alert";
 // react-bootstrap components
@@ -19,10 +19,10 @@ import {
 import axios from 'axios'
 
 const ARRIVALS_URL = `http://localhost:8080/api/arrivals`;
-const dynamicData = [axios.get(ARRIVALS_URL)];
-dynamicData[0].then( res => {
-  console.log('>>>>> dynamicData', res);
-});
+// let dynamicData = axios.get(ARRIVALS_URL);
+// dynamicData.then( res => {
+//   console.log('>>>>> dynamicData', res);
+// });
 
 function Flights() {
 
@@ -109,6 +109,24 @@ function Flights() {
 }
 
 function FlightsTable() {
+  // Block of code from https://jasonwatmore.com/post/2020/07/17/react-axios-http-get-request-examples
+  const [totalReactPackages, setTotalReactPackages] = useState(
+    null // Try function instead, as in https://www.geeksforgeeks.org/what-is-usestate-in-react/
+    );
+
+  useEffect(() => {
+      // GET request using axios inside useEffect React hook
+      const fetchData = async () => {
+        axios.get(ARRIVALS_URL)
+            .then(response => setTotalReactPackages(response.data/*.total*/))
+            .then("Fetched data successfully!");
+      }
+
+      fetchData();
+  
+  // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  }, []);
+  // End block
 
   const notificationAlertRef = React.useRef(null);
   const notify = (place) => {
@@ -173,7 +191,8 @@ function FlightsTable() {
       </thead>
       <tbody>
         {/* {{ dynamicData }} */}
-        {dynamicData.map((flight) =>
+        {//!!(totalReactPackages)? "":
+        totalReactPackages.map((flight) =>
           <tr key={flight}>
           {Object.entries(flight).map(([key, obj]) =>
             <td key={key}>{
@@ -182,7 +201,7 @@ function FlightsTable() {
           )
           }
           </tr>
-        )}
+        )/*})*/}
         <tr>
           <td>1</td>
           <td>London</td>
