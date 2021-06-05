@@ -25,7 +25,7 @@ public class FlightService {
   public Collection<Flight> getLastArrivalFlights() {
     Collection<OpenSkyDto> openSkyDtos =
         openSkyClient.getArrivalFlights(
-            appConfig.getAirportCode(), LocalDateTime.now().minusDays(3), LocalDateTime.now());
+            appConfig.getAirportCode(), LocalDateTime.now().minusDays(1), LocalDateTime.now());
     ArrayList<Flight> flights = new ArrayList<>();
     for (OpenSkyDto dto : openSkyDtos) {
       Flight flight = mapFromOpenSkyDtoToFlight(dto);
@@ -38,7 +38,7 @@ public class FlightService {
   public Collection<Flight> getLastDepartureFlights() {
     Collection<OpenSkyDto> openSkyDtos =
         openSkyClient.getDepartureFlights(
-            appConfig.getAirportCode(), LocalDateTime.now().minusDays(3), LocalDateTime.now());
+            appConfig.getAirportCode(), LocalDateTime.now().minusDays(1), LocalDateTime.now());
     ArrayList<Flight> flights = new ArrayList<>();
     for (OpenSkyDto dto : openSkyDtos) {
       Flight flight = mapFromOpenSkyDtoToFlight(dto);
