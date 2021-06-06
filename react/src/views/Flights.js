@@ -110,22 +110,26 @@ function Flights() {
 
 function FlightsTable() {
   // Block of code from https://jasonwatmore.com/post/2020/07/17/react-axios-http-get-request-examples
-  const [totalReactPackages, setTotalReactPackages] = useState(
-    null // Try function instead, as in https://www.geeksforgeeks.org/what-is-usestate-in-react/
-    );
+  const [totalReactPackages/*, setTotalReactPackages*/] = useState(
+    //null // Try function instead, as in https://www.geeksforgeeks.org/what-is-usestate-in-react/
+    function getArrivals() {
+      // console.log("log");
+      return axios.get(ARRIVALS_URL);
+    }
+  );
 
-  useEffect(() => {
-      // GET request using axios inside useEffect React hook
-      const fetchData = async () => {
-        axios.get(ARRIVALS_URL)
-            .then(response => setTotalReactPackages(response.data/*.total*/))
-            .then("Fetched data successfully!");
-      }
+  // useEffect(() => {
+  //     // GET request using axios inside useEffect React hook
+  //     const fetchData = async () => {
+  //       axios.get(ARRIVALS_URL)
+  //           .then(response => setTotalReactPackages(response.data/*.total*/))
+  //           .then("Fetched data successfully!");
+  //     }
 
-      fetchData();
+  //     fetchData();
   
-  // empty dependency array means this effect will only run once (like componentDidMount in classes)
-  }, []);
+  // // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  // }, []);
   // End block
 
   const notificationAlertRef = React.useRef(null);
@@ -190,9 +194,8 @@ function FlightsTable() {
         </tr>
       </thead>
       <tbody>
-        {/* {{ dynamicData }} */}
         {//!!(totalReactPackages)? "":
-        totalReactPackages.map((flight) =>
+        totalReactPackages.data.map((flight) =>
           <tr key={flight}>
           {Object.entries(flight).map(([key, obj]) =>
             <td key={key}>{
