@@ -10,13 +10,7 @@ const mapStyles = {
 // Arrivals at Lisbon PT airport
 const ARRIVALS_URL = `http://localhost:8080/api/arrivals`;
 
-export class MapContainer extends Component {
-
-    state = {
-        showingInfoWindow: false,  // Hides or shows the InfoWindow
-        activeMarker: {},          // Shows the active marker upon click
-        selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
-    };
+export class Maps extends Component {
 
     //event handlers for when the Map and the Marker are clicked
     //The onMarkerClick method is used to show the InfoWindow, which is a component
@@ -43,18 +37,29 @@ export class MapContainer extends Component {
     constructor(props){
         super(props)
         this.state = {
-            arrivalsData:[]
+            arrivalsData:[],
+            contentStrings:[],
+            showingInfoWindow: false,  // Hides or shows the InfoWindow
+            activeMarker: {},          // Shows the active marker upon click
+            selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
         }
+
     }
 
-    componentDidMount() {
+    componentDidMount(){
+
           axios.get(ARRIVALS_URL)
           .then((response) => {
-              this.setState({ arrivalsData: response.data })
+              this.setState({ arrivalsData: response.data});
+              for(let flight in response.data){
+                 this.state.contentStrings.push("Voo id: "+flight[0] + ", Plane Chassis: " + flight[1]+ ", Departure Airport: " + flight[2]+ ", Last Seen: " + flight[3]);
+              }
           });
     }
 
     render() {
+
+
         return (
           <Map
             google={this.props.google}
@@ -69,19 +74,37 @@ export class MapContainer extends Component {
           >
             <Marker
               onClick={this.onMarkerClick}
-              name={'Kenyatta International Convention Centre'}
+              name={"olas"}
             />
             <InfoWindow
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}
               onClose={this.onClose}
             >
+            <div>
+              <h4>{this.state.selectedPlace.name}</h4>
+            </div>
             </InfoWindow>
+            <tbody>
+            {
+                this.state.arrivalsData.map(
+                    flight =>
+
+                        {flight.icao24
+                        flight.estDepartureAirport
+                        flight.firstSeen
+                        flight.lastSeen
+
+                        }
+                )
+            }
+            </tbody>
           </Map>
+
         );
       }
 }
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyBk0ZnJTY4g4euP07og1_w5_5FSRcJ-y4k'
-})(MapContainer);
+})(Maps);
