@@ -14,9 +14,9 @@ public class HttpRequestTest {
 
   @Autowired private TestRestTemplate restTemplate;
 
-  public void flightSouldReturnDefaultMessage() {
-    assertThat(
-        this.restTemplate.getForObject(
-            "http://localhost:" + port + "/api/arrivals", OpenSkyDto[].class));
-  }
+  // public void flightSouldReturnDefaultMessage() {
+  //   assertThat(
+  //       this.restTemplate.getForObject(
+  //           "http://localhost:" + port + "/api/arrivals", OpenSkyDto[].class));
+  // }
 }
