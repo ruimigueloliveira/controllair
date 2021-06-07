@@ -12,6 +12,7 @@ RUN npm ci reactstrap
 RUN npm ci bootstrap
 RUN npm ci jquery
 RUN npm ci axios
+RUN npm ci google-maps-react
 
 # add react
 COPY . ./
