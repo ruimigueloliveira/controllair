@@ -38,7 +38,6 @@ export class Maps extends Component {
         super(props)
         this.state = {
             arrivalsData:[],
-            contentStrings:[],
             showingInfoWindow: false,  // Hides or shows the InfoWindow
             activeMarker: {},          // Shows the active marker upon click
             selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
@@ -51,9 +50,6 @@ export class Maps extends Component {
           axios.get(ARRIVALS_URL)
           .then((response) => {
               this.setState({ arrivalsData: response.data});
-              for(let flight in response.data){
-                 this.state.contentStrings.push("Voo id: "+flight[0] + ", Plane Chassis: " + flight[1]+ ", Departure Airport: " + flight[2]+ ", Last Seen: " + flight[3]);
-              }
           });
     }
 
@@ -72,37 +68,42 @@ export class Maps extends Component {
               }
             }
           >
-            <Marker
-              onClick={this.onMarkerClick}
-              name={"olas"}
-            />
-            <InfoWindow
-              marker={this.state.activeMarker}
-              visible={this.state.showingInfoWindow}
-              onClose={this.onClose}
-            >
-            <div>
-              <h4>{this.state.selectedPlace.name}</h4>
-            </div>
-            </InfoWindow>
-            <tbody>
+            
             {
-                this.state.arrivalsData.map(
-                    flight =>
-
-                        {flight.icao24
-                        flight.estDepartureAirport
-                        flight.firstSeen
-                        flight.lastSeen
-
-                        }
+              this.state.arrivalsData.map(
+                flight =>
+                        <tr>
+                          <Marker
+                            onClick={this.onMarkerClick}
+                            position={{
+                              lat: getRandomArbitrary(38.76450596898016, 38.78761708928799),
+                              lng: getRandomArbitrary(-9.144989107270954, -9.12991438259596)
+                            }}
+                            name={"Voo id: "+ flight.icao24 + ", Plane Chassis: " + flight.callsign + ", Departure Airport: " + flight.estDepartureAirport + ", Last Seen: " + flight.lastSeen}
+                          />
+                          <InfoWindow
+                            marker={this.state.activeMarker}
+                            visible={this.state.showingInfoWindow}
+                            onClose={this.onClose}
+                          >
+                            <div>
+                              <h4>
+                                {this.state.selectedPlace.name}
+                              </h4>
+                            </div>
+                          </InfoWindow>
+                        </tr>
                 )
             }
-            </tbody>
+            
           </Map>
 
         );
       }
+}
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
 export default GoogleApiWrapper({
