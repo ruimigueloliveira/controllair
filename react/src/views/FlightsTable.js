@@ -62,7 +62,6 @@ class FlightsTable extends React.Component{
     }
     
     render() {
-
         return (
             <Table className="table-hover table-striped">
                 <thead>
