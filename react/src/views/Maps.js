@@ -12,6 +12,8 @@ const ARRIVALS_URL = `http://localhost:8080/api/arrivals`;
 
 export class Maps extends Component {
 
+  // TODO: check https://github.com/fullstackreact/google-maps-react/blob/master/src/GoogleApiComponent.js
+
     //event handlers for when the Map and the Marker are clicked
     //The onMarkerClick method is used to show the InfoWindow, which is a component
     //in the google-maps-react library which gives you the ability for a pop-up
