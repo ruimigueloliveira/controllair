@@ -44,7 +44,7 @@ class FlightsTable extends React.Component{
                             <td>{flight.firstSeen}</td>
                             <td>{flight.lastSeen}</td>
                             <Button block onClick={() => {
-                                this.props.notify("tl", "Notifications activated for flight "+flight.callsign+"!");
+                                this.props.notify("tl", "Notifications activated for flight: "+flight.callsign+"!");
                                 }} variant="info">
                             Notify
                             </Button>
