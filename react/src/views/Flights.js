@@ -20,11 +20,6 @@ import axios from 'axios'
 // FlightsTable table renderizer
 import FlightsTable from "./FlightsTable";
 
-// let dynamicData = axios.get(ARRIVALS_URL);
-// dynamicData.then( res => {
-//   console.log('>>>>> dynamicData', res);
-// });
-
 function Flights() {
 
   const notificationAlertRef = React.useRef(null);
@@ -66,23 +61,7 @@ function Flights() {
     };
     notificationAlertRef.current.notificationAlert(options);
   };
-  // const dynamicData = {
-    
-  // };
-  
-  //------------------------------GET-DATA-FROM-API------------------------------
-  // axios.get("http://localhost:8080/api/arrivals")
-  // .then(
-  //   console.log("Great success!")
-  // )
-  // .then(
-  //   res => {
-  //     const flights = res.data;
-  //     this.setState({flights})
-  //   }
-  // )
-  // ----------------------------------------------------------------------------
-  
+
   return (
     <>
       <div className="rna-container">

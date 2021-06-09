@@ -1,46 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
- 
-// const notificationAlertRef = React.useRef(null);
-// const notify = (place) => {
-//     var color = Math.floor(Math.random() * 5 + 1);
-//     var type;
-//     switch (color) {
-//     case 1:
-//         type = "primary";
-//         break;
-//     case 2:
-//         type = "success";
-//         break;
-//     case 3:
-//         type = "danger";
-//         break;
-//     case 4:
-//         type = "warning";
-//         break;
-//     case 5:
-//         type = "info";
-//         break;
-//     default:
-//         break;
-//     }
-//     var options = {};
-//     options = {
-//     place: place,
-//     message: (
-//         <div>
-//         <div>
-//             <b>Notifications activated!</b>
-//         </div>
-//         </div>
-//     ),
-//     type: type,
-//     icon: "nc-icon nc-bell-55",
-//     autoDismiss: 7,
-//     };
-//     notificationAlertRef.current.notificationAlert(options);
-// };
+
 
 // Arrivals at Lisbon PT airport
 const ARRIVALS_URL = `http://192.168.160.87:10001/api/arrivals`;
