@@ -8,7 +8,7 @@
 		<version>2.5.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>pt.ua.deti.es.p10</groupId>
+	<groupId>ESp10</groupId>
 	<artifactId>controllAir</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>controllAir</name>

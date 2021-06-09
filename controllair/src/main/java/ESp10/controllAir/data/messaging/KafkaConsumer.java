@@ -12,6 +12,14 @@ public class KafkaConsumer {
 
   private final Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
+  public String getTopic() {
+    return "flights";
+  }
+
+  public String getgroup() {
+    return "group_id";
+  }
+
   @KafkaListener(topics = "flights", groupId = "group_id")
   public void consume(Flight message) throws IOException {
     logger.info(

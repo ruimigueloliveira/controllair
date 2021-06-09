@@ -77,30 +77,29 @@ pipeline {
         
         stage('Deploying controllAir in PlayGroundVM ') { 
             steps {
-                 withCredentials([usernamePassword(credentialsId: 'esp10_vms', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'esp10_vms', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     script {
-                      remote.user = USERNAME
-                      remote.password = PASSWORD
-                      remote.allowAnyHosts = true
-                        
+                        remote.user = USERNAME
+                        remote.password = PASSWORD
+                        remote.allowAnyHosts = true
                     }
                     sshCommand remote: remote, command: "docker stop esp10_controllair"
                     sshCommand remote: remote, command: "docker rm esp10_controllair"
                     sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp10/controllair_image"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp10/controllair_image"
-                    sshCommand remote: remote, command: "docker create -p 10001:3000 --name esp10_controllair 192.168.160.48:5000/esp10/controllair_image"
+                    sshCommand remote: remote, command: "docker create -p 10001:8080 --name esp10_controllair 192.168.160.48:5000/esp10/controllair_image"
                     sshCommand remote: remote, command: "docker start esp10_controllair"
-                  }
+                }
             }
         }
         
         stage('Deploying react in PlayGroundVM ') { 
             steps {
-                 withCredentials([usernamePassword(credentialsId: 'esp10_vms', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'esp10_vms', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     script {
-                      remote.user = USERNAME
-                      remote.password = PASSWORD
-                      remote.allowAnyHosts = true
+                        remote.user = USERNAME
+                        remote.password = PASSWORD
+                        remote.allowAnyHosts = true
                         
                     }
                     sshCommand remote: remote, command: "docker stop esp10_react"
@@ -109,8 +108,8 @@ pipeline {
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp10/react_image"
                     sshCommand remote: remote, command: "docker create -p 10002:3000 --name esp10_react 192.168.160.48:5000/esp10/react_image"
                     sshCommand remote: remote, command: "docker start esp10_react"
-                  }
+                }
             }
         }
-	}
+    }
 }
