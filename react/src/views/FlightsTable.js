@@ -27,7 +27,7 @@ class FlightsTable extends React.Component{
             <Table className="table-hover table-striped">
                 <thead>
                 <tr>
-                    <th className="border-0">ID</th>
+                    <th className="border-0">Icao24</th>
                     <th className="border-0">From</th>
                     <th className="border-0">Time first seen</th>
                     <th className="border-0">Time last seen</th>
@@ -35,7 +35,7 @@ class FlightsTable extends React.Component{
                 </tr>
                 </thead>
                 <tbody>
-                {//!!(arrivalsData)? "":
+                {
                     this.state.arrivalsData.map(
                         flight =>
                         <tr>
@@ -43,7 +43,9 @@ class FlightsTable extends React.Component{
                             <td>{flight.estDepartureAirport}</td>
                             <td>{flight.firstSeen}</td>
                             <td>{flight.lastSeen}</td>
-                            <Button block /*onClick={() => notify("tl")}*/ variant="info">
+                            <Button block onClick={() => {
+                                this.props.notify("tl", "Notifications activated for flight "+flight.callsign+"!");
+                                }} variant="info">
                             Notify
                             </Button>
                         </tr>

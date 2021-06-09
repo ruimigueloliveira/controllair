@@ -23,7 +23,7 @@ import FlightsTable from "./FlightsTable";
 function Flights() {
 
   const notificationAlertRef = React.useRef(null);
-  const notify = (place) => {
+  const notify = (place, msg) => {
     var color = Math.floor(Math.random() * 5 + 1);
     var type;
     switch (color) {
@@ -51,7 +51,7 @@ function Flights() {
       message: (
         <div>
           <div>
-            <b>Notifications activated!</b>
+            <b>{msg}</b>
           </div>
         </div>
       ),
@@ -78,7 +78,7 @@ function Flights() {
                 </p>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
-                <FlightsTable></FlightsTable>
+                <FlightsTable notify={notify} notificationAlertRef={notificationAlertRef}/>
               </Card.Body>
             </Card>
           </Col>
