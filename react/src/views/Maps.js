@@ -62,13 +62,14 @@ export class Maps extends Component {
           });
     }
 
-    renderPlanes(){
+    /*renderPlanes(){
         var count = 0;
         console.log("3253465y")
         console.log(this.state.arrivalsData)
-        return this.state.arrivalsData.map(flight => {
+        return this.state.arrivalsData.map((flight, index) => {
             count += 1;
             return <Marker
+                key = {index}
                 onClick = { this.onMarkerClick }
                 title = { "Airplane: " + count }
                 position={{
@@ -102,6 +103,50 @@ export class Maps extends Component {
                 <div>{ this.renderPlanes() } </div>
             </Map>
         );
+    }*/
+
+    render(){
+        return(
+            <Map
+                google={this.props.google}
+                zoom={14}
+                style={mapStyles}
+                initialCenter={
+                  {
+                    lat: 38.775275699356314,
+                    lng: -9.135843353807045
+                  }
+                }
+            >
+                {
+                    this.state.arrivalsData.map((flight, index) => (
+                        <Marker
+                            key = { index }
+                            onClick = { this.onMarkerClick }
+                            name = { "Voo id: "+ flight.icao24 + ", Plane Chassis: " + flight.callsign + ", Departure Airport: " + flight.estDepartureAirport + ", Last Seen: " + flight.lastSeen }
+                            position={{
+                              lat: getRandomArbitrary(38.76450596898016, 38.78761708928799),
+                              lng: getRandomArbitrary(-9.144989107270954, -9.12991438259596)
+                            }}
+                            icon={{
+                              url: 'https://pics.clipartpng.com/Airplane_PNG_Clipart-421.png',
+                              scaledSize: new google.maps.Size(40, 40)
+                            }}
+                        />
+                    ))
+                }
+
+                <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                >
+                <div>
+                    <h4>{this.state.selectedPlace.name}</h4>
+                </div>
+                </InfoWindow>
+            </Map>
+        )
     }
 
 }
