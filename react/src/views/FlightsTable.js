@@ -6,6 +6,7 @@ import { Table, Button } from 'react-bootstrap';
 // Arrivals at Lisbon PT airport
 const ARRIVALS_URL = `http://192.168.160.87:10001/api/arrivals`;
 
+
 class FlightsTable extends React.Component{
 
     constructor(props){

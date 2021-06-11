@@ -8,7 +8,8 @@ const mapStyles = {
 };
 
 // Arrivals at Lisbon PT airport
-const ARRIVALS_URL = `http://localhost:8080/api/arrivals`;
+const ARRIVALS_URL = `http://192.168.160.87:10001/api/arrivals`;
+//const ARRIVALS_URL = `http://localhost:8080/api/arrivals`;
 
 export class Maps extends Component {
 
@@ -18,7 +19,6 @@ export class Maps extends Component {
     //The onMarkerClick method is used to show the InfoWindow, which is a component
     //in the google-maps-react library which gives you the ability for a pop-up
     //window showing details of the clicked Marker
-
     state = {
         showingInfoWindow: false,
         activeMarker: {},
@@ -49,7 +49,7 @@ export class Maps extends Component {
             arrivalsData:[],
             showingInfoWindow: false,  // Hides or shows the InfoWindow
             activeMarker: {},          // Shows the active marker upon click
-            selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
+            selectedPlace: {},         // Shows the InfoWindow to the selected place upon a marker
         }
 
     }
@@ -62,49 +62,6 @@ export class Maps extends Component {
           });
     }
 
-    /*renderPlanes(){
-        var count = 0;
-        console.log("3253465y")
-        console.log(this.state.arrivalsData)
-        return this.state.arrivalsData.map((flight, index) => {
-            count += 1;
-            return <Marker
-                key = {index}
-                onClick = { this.onMarkerClick }
-                title = { "Airplane: " + count }
-                position={{
-                  lat: getRandomArbitrary(38.76450596898016, 38.78761708928799),
-                  lng: getRandomArbitrary(-9.144989107270954, -9.12991438259596)
-                }}
-                name={"Voo id: "+ flight.icao24 + ", Plane Chassis: " + flight.callsign + ", Departure Airport: " + flight.estDepartureAirport + ", Last Seen: " + flight.lastSeen}
-                icon={{
-                      url: 'https://pics.clipartpng.com/Airplane_PNG_Clipart-421.png',
-                      scaledSize: new google.maps.Size(30, 30)
-                }}
-            />
-        })
-    }
-
-    render(){
-
-        return(
-            <Map
-                google={this.props.google}
-                zoom={14}
-                style={mapStyles}
-                initialCenter={
-                  {
-                    lat: 38.775275699356314,
-                    lng: -9.135843353807045
-                  }
-                }
-                onClick={this.onMapClicked}
-            >
-                <div>{ this.renderPlanes() } </div>
-            </Map>
-        );
-    }*/
-
     render(){
         return(
             <Map
@@ -117,21 +74,25 @@ export class Maps extends Component {
                     lng: -9.135843353807045
                   }
                 }
+                onClick = {this.onMapClicked}
+
             >
                 {
                     this.state.arrivalsData.map((flight, index) => (
                         <Marker
+
                             key = { index }
-                            onClick = { this.onMarkerClick }
                             name = { "Voo id: "+ flight.icao24 + ", Plane Chassis: " + flight.callsign + ", Departure Airport: " + flight.estDepartureAirport + ", Last Seen: " + flight.lastSeen }
                             position={{
                               lat: getRandomArbitrary(38.76450596898016, 38.78761708928799),
                               lng: getRandomArbitrary(-9.144989107270954, -9.12991438259596)
                             }}
+                            onClick = { this.onMarkerClick }
                             icon={{
                               url: 'https://pics.clipartpng.com/Airplane_PNG_Clipart-421.png',
                               scaledSize: new google.maps.Size(40, 40)
                             }}
+
                         />
                     ))
                 }
