@@ -74,7 +74,7 @@ function Flights() {
               <Card.Header>
                 <Card.Title as="h4">Flights</Card.Title>
                 <p className="card-category">
-                  To Lisbon Airport
+                  Lisbon Airport
                 </p>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
