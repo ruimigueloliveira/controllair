@@ -8,7 +8,8 @@ const mapStyles = {
 };
 
 // Arrivals at Lisbon PT airport
-const ARRIVALS_URL = `http://localhost:8080/api/arrivals`;
+const ARRIVALS_URL = `http://192.168.160.87:10001/api/arrivals`;
+//const ARRIVALS_URL = `http://localhost:8080/api/arrivals`;
 
 export class Maps extends Component {
 
@@ -18,6 +19,12 @@ export class Maps extends Component {
     //The onMarkerClick method is used to show the InfoWindow, which is a component
     //in the google-maps-react library which gives you the ability for a pop-up
     //window showing details of the clicked Marker
+    state = {
+        showingInfoWindow: false,
+        activeMarker: {},
+        selectedPlace: {},
+    };
+
     onMarkerClick = (props, marker, e) =>
         this.setState({
           selectedPlace: props,
@@ -27,7 +34,7 @@ export class Maps extends Component {
 
     //The onClose method is for closing the InfoWindow once a user clicks on
     //the close button on the InfoWindow.
-    onClose = props => {
+    onMapClicked = (props) => {
         if (this.state.showingInfoWindow) {
           this.setState({
             showingInfoWindow: false,
@@ -42,7 +49,7 @@ export class Maps extends Component {
             arrivalsData:[],
             showingInfoWindow: false,  // Hides or shows the InfoWindow
             activeMarker: {},          // Shows the active marker upon click
-            selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
+            selectedPlace: {},         // Shows the InfoWindow to the selected place upon a marker
         }
 
     }
@@ -55,53 +62,54 @@ export class Maps extends Component {
           });
     }
 
-    render() {
+    render(){
+        return(
+            <Map
+                google={this.props.google}
+                zoom={14}
+                style={mapStyles}
+                initialCenter={
+                  {
+                    lat: 38.775275699356314,
+                    lng: -9.135843353807045
+                  }
+                }
+                onClick = {this.onMapClicked}
 
+            >
+                {
+                    this.state.arrivalsData.map((flight, index) => (
+                        <Marker
 
-        return (
-          <Map
-            google={this.props.google}
-            zoom={14}
-            style={mapStyles}
-            initialCenter={
-              {
-                lat: 38.775275699356314,
-                lng: -9.135843353807045
-              }
-            }
-          >
-            
-            {
-              this.state.arrivalsData.map(
-                flight =>
-                        <tr>
-                          <Marker
-                            onClick={this.onMarkerClick}
+                            key = { index }
+                            name = { "Voo id: "+ flight.icao24 + ", Plane Chassis: " + flight.callsign + ", Departure Airport: " + flight.estDepartureAirport + ", Last Seen: " + flight.lastSeen }
                             position={{
                               lat: getRandomArbitrary(38.76450596898016, 38.78761708928799),
                               lng: getRandomArbitrary(-9.144989107270954, -9.12991438259596)
                             }}
-                            name={"Voo id: "+ flight.icao24 + ", Plane Chassis: " + flight.callsign + ", Departure Airport: " + flight.estDepartureAirport + ", Last Seen: " + flight.lastSeen}
-                          />
-                          <InfoWindow
-                            marker={this.state.activeMarker}
-                            visible={this.state.showingInfoWindow}
-                            onClose={this.onClose}
-                          >
-                            <div>
-                              <h4>
-                                {this.state.selectedPlace.name}
-                              </h4>
-                            </div>
-                          </InfoWindow>
-                        </tr>
-                )
-            }
-            
-          </Map>
+                            onClick = { this.onMarkerClick }
+                            icon={{
+                              url: 'https://pics.clipartpng.com/Airplane_PNG_Clipart-421.png',
+                              scaledSize: new google.maps.Size(40, 40)
+                            }}
 
-        );
-      }
+                        />
+                    ))
+                }
+
+                <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                >
+                <div>
+                    <h4>{this.state.selectedPlace.name}</h4>
+                </div>
+                </InfoWindow>
+            </Map>
+        )
+    }
+
 }
 
 function getRandomArbitrary(min, max) {

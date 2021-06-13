@@ -12,6 +12,7 @@ const DEPARTURES_ID = 2;
 // KafkaJS: For consuming alarms: as in https://kafka.js.org/docs/consumer-example (Obsolete)
 // TODO: Websockets https://dev.to/subhransu/realtime-chat-app-using-kafka-springboot-reactjs-and-websockets-lc
 
+
 class FlightsTable extends React.Component{
 
     constructor(props){
