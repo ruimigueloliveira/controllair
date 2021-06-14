@@ -7,7 +7,7 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
-      enable-auto-commit: false
+      enable-auto-commit: true
   listener:
     ack-mode: manual
 

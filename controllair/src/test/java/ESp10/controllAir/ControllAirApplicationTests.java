@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import ESp10.controllAir.config.AppConfig;
-import ESp10.controllAir.data.messaging.KafkaConsumer;
 import ESp10.controllAir.services.FlightService;
 import ESp10.controllAir.web.controller.FlightController;
 import ESp10.controllAir.web.controller.KafkaController;
@@ -26,7 +25,7 @@ class ControllAirApplicationTests {
   @Autowired private FlightController controller;
   @Autowired private AppConfig appConfig;
 
-  @Autowired KafkaConsumer consumer = new KafkaConsumer();
+  //@Autowired KafkaConsumer consumer = new KafkaConsumer();
   @Autowired private KafkaController kafkaController;
 
   @MockBean private FlightService service;
@@ -60,7 +59,7 @@ class ControllAirApplicationTests {
 
   // kafka ones
 
-  @Test
+  /*@Test
   void verify_get_messages() {
     assert (consumer.getTopic() != null && consumer.getTopic() == "flights");
   }
@@ -69,6 +68,8 @@ class ControllAirApplicationTests {
   void verify_group() {
     assert (consumer.getgroup() != null && consumer.getgroup() == "group_id");
   }
+
+   */
 
   @Test
   void verify_uri() {

@@ -18,25 +18,6 @@ spring:
     initialization-mode: always
 
   kafka:
-    consumer:
-      bootstrap-servers: 192.168.160.18:19092 #localhost:9092
-      group-id: group_id
-      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-      auto-offset-reset: earliest
-      enable-auto-commit: true
-      properties:
-        spring:
-          json:
-            trusted:
-              packages: 'ESp10.controllAir.services.models'
-          deserializer:
-            key:
-              delegate:
-                class: org.apache.kafka.common.serialization.StringDeserializer
-            value:
-              delegate:
-                class: org.springframework.kafka.support.serializer.JsonDeserializer
     producer:
       bootstrap-servers: 192.168.160.18:19092 #localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
