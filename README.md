@@ -1,26 +1,6 @@
 # controllair
 
-## Run:
+The system displays information on flights arriving and departing from Lisbon airport.
 
-### ControallAir Docker:
-1. Start docker
-2. `cd controllair`
-3. `docker-compose up -d`
-
-### Maven build
-1. `cd controllair`
-2. `mvn clean install`
-
-### Run spring-boot app:
-1. `cd controllair`
-2. `mvn spring-boot:run`
-
-
-
-### React Docker:
-1. Start docker
-2. `cd react`
-3. `docker build -t react-image .`
-4. `docker run -d -p 3001:3000 --name react-app react-image`
-5. Open http://localhost:3001/
+Developed with [André Almeida](https://github.com/Rupesa), [António Domigues](https://github.com/Rupesa) and [Henrique Silva](https://github.com/Rupesa) in 2021
 
