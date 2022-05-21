@@ -1,0 +1,24 @@
+app:
+  openSkyUri: "https://USERNAME:PASSWORD@opensky-network.org/api/flights/arrival"
+  airportCode: "LPPT"
+  openSkyUri1: "https://USERNAME:PASSWORD@opensky-network.org/api/flights/departure"
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create #inicializa o schema da bd
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # url: jdbc:mysql://localhost:33060/ap_db?createDatabaseIfNotExist=true
+    cap_add:
+      - SYS_NICE
+    url: jdbc:mysql://192.168.160.18:10001/controllair_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: mysql
+    initialization-mode: always
+
+  kafka:
+    producer:
+      bootstrap-servers: 192.168.160.18:19092 #localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
